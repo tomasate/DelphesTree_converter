@@ -32,6 +32,12 @@ def split_events(df:pd.DataFrame, label:str, path:str = "./", file_type:str = "p
         df2.to_parquet(f"{path}/{label}_2jets.{file_type}")
         df3.to_parquet(f"{path}/{label}_3jets.{file_type}")
         df4.to_parquet(f"{path}/{label}_4jets.{file_type}")
+    elif file_type == "csv":
+        df2.to_csv(f"{path}/{label}_2jets.{file_type}")
+        df3.to_csv(f"{path}/{label}_3jets.{file_type}")
+        df4.to_csv(f"{path}/{label}_4jets.{file_type}")
+    else:
+        raise ValueError(f"File type {file_type} not supported")
     
     
 
