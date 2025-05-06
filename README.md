@@ -2,6 +2,12 @@
 
 Repository with python code to convert root files produced through Delphes into pandas DataFrame. 
 
+It's recommended to use python 3.10.4 to run the scripts, and the required libraries are stored in `requirements_coffea_env.txt`,
+and can be installed doing on your terminal:
+```
+pip install requirements_coffea_env.txt
+```
+
 The main code is stored in `dt_converter.py`. It has a class called `Converter` that can bu used as follows:
 
 ```
@@ -20,5 +26,13 @@ number of jets per event as follows:
 ```
 split_events(df, label = 'Signal_37', path = '/store/atehort/', file_type = 'coffea')
 ```
+
+Use the `runner` via terminal as:
+
+```
+python3 runner --path <Path_To_The_Root> --label <label_for_the_output_file> --output_path <path_to_the_output_dir> --file_type <desired_output_type>
+```
+
+Supported output types are `parquet`, `coffea` or `csv`
 
 Any question, please write to tatehort@cern.ch
