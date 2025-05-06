@@ -6,11 +6,11 @@ The main code is stored in `dt_converter.py`. It has a class called `Converter` 
 
 ```
 tree_test = Converter(fname)
-    tree_test.generate({"Jet": ["PT", "Eta", "Phi", "Mass", "BTag", "TauTag"],
-                        "Muon": ["PT", "Eta", "Phi", "Charge"],
-                        "Electron": ["PT", "Eta", "Phi", "Charge"],
-                        "MissingET": ["MET", "Phi"]})
-    df = tree_test.df
+tree_test.generate({"Jet": ["PT", "Eta", "Phi", "Mass", "BTag", "TauTag"],
+                    "Muon": ["PT", "Eta", "Phi", "Charge"],
+                    "Electron": ["PT", "Eta", "Phi", "Charge"],
+                    "MissingET": ["MET", "Phi"]})
+df = tree_test.df
 ```
 You may include in the branches from the Delphes object that you're interested for your analysis as the example states.
 
