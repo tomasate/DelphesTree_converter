@@ -23,7 +23,7 @@ label = args.label
 output_path = args.output_path
 file_type = args.file_type
 
-tree_test = Converter(fname)
+tree_test = Converter(root_path)
 tree_test.generate({"Jet": ["PT", "Eta", "Phi", "Mass", "BTag", "TauTag"],
                     "Muon": ["PT", "Eta", "Phi", "Charge"],
                     "Electron": ["PT", "Eta", "Phi", "Charge"],
