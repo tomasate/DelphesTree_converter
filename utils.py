@@ -3,7 +3,7 @@ import pandas as pd
 from coffea.util import load
 from coffea.util import save
 
-def split_events_in_parquets(df:pd.DataFrame, label:str, path:str = "./")->None:
+def split_events(df:pd.DataFrame, label:str, path:str = "./", file_type:str = "parquet")->None:
     """
     Split the events in the dataframe into different parquets based on the number of jets.
     Args:
@@ -24,10 +24,16 @@ def split_events_in_parquets(df:pd.DataFrame, label:str, path:str = "./")->None:
     df3 = df.copy().loc[index_3]
     df4 = df.copy().loc[index_4]
     
-
-    save(df2, f"{path}/{label}_2jets.parquet")
-    save(df3, f"{path}/{label}_3jets.parquet")
-    save(df4, f"{path}/{label}_4jets.parquet")
+    if file_type == "coffea":
+        save(df2, f"{path}/{label}_2jets.{file_type}")
+        save(df3, f"{path}/{label}_3jets.{file_type}")
+        save(df4, f"{path}/{label}_4jets.{file_type}")
+    elif file_type == "parquet":
+        df2.to_parquet(f"{path}/{label}_2jets.{file_type}")
+        df3.to_parquet(f"{path}/{label}_3jets.{file_type}")
+        df4.to_parquet(f"{path}/{label}_4jets.{file_type}")
+    
+    
 
     
     
