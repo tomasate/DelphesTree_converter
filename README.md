@@ -2,12 +2,46 @@
 
 Repository with python code to convert root files produced through Delphes into pandas DataFrame. 
 
-It's recommended to use python 3.10.4 to run the scripts, and the required libraries are stored in `requirements_coffea_env.txt`,
-and can be installed doing on your terminal:
+It's recommended to use python 3.10.4 to run the scripts, and the required python modules. 
+
+## Conda instalation
+If your python version is not thisone, you can get it with a conda environment. Check if you have conda installed by doing:
 ```
-pip install requirements_coffea_env.txt
+conda --version
+```
+If you see anything different than `conda: command not found``, you have conda. Otherwise, download it by doing
+
+```
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+```
+once downloaded, do 
+```
+chmod +x Miniconda3-latest-Linux-x86_64.sh
+./Miniconda3-latest-Linux-x86_64.sh
+```
+to install it. Follow the instructions untill the end. Once installed activate conda if you didn't activated it by default in the instalation process doing:
+```
+source /home/atehort/miniconda3/bin/activate
 ```
 
+Now you may want to create a virtual environment for this task by doing:
+
+```
+conda create -n <name_environment> python=3.10.4
+```
+And activate it by doing
+```
+conda activate <name_environment>
+```
+
+##Instalation of the requirements
+When you create the environment you'll get a bunch of modules, the otherones needed you can get them by doing
+```
+pip install coffea==2025.3.0
+```
+
+
+##Running the code
 The main code is stored in `dt_converter.py`. It has a class called `Converter` that can bu used as follows:
 
 ```
