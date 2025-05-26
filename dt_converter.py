@@ -35,10 +35,9 @@ class Converter:
     Any doubt please consider to write to tatehort@cern.ch or to Tomas Atehortua Garces via mattermost
     """
 
-    def __init__(self, usr_path, tree_name = "/Delphes"):
+    def __init__(self, usr_path):
         self.path = usr_path
-        self.tree = tree_name
-        self.events = NanoEventsFactory.from_root(self.path, schemaclass=DelphesSchema.v1, treepath= self.tree).events()
+        self.events = NanoEventsFactory.from_root(self.path, schemaclass=DelphesSchema).events()
         #self.events = NanoEventsFactory.from_root(self.path, schemaclass=DelphesSchema).events()
 
     def generate(self, branches = {"Jet": ["PT", "Eta", "Phi", "Mass", "BTag", "TauTag"],
@@ -57,7 +56,7 @@ class Converter:
 
         self.max_jets = jet_elements
         self.max_e_mu = e_mu_elements
-        self.df = pd.DataFrame(index=range(len(self.events)))
+        self.df = pd.DataFrame(index=range(len(events.MissingET.MET.compute())))
 
         for branch, leafes in branches.items():
             for leaf in leafes:
@@ -69,29 +68,32 @@ class Converter:
     def _add_branch(self, branch, leaf):
         branch_name, leaf_name = branch.lower(), leaf.lower()
         if branch == "MissingET":
-            var = self.events[branch][leaf]
-            var = ak.to_pandas(var)
+            var = self.events[branch][leaf].compute().tolist()
+            var = pd.DataFrame(var)
             var.reset_index(drop= True,inplace=True)
             var.columns = [f'{branch_name}_{leaf_name}']
             
 
         elif branch == "Electron" or branch == "Muon":
-            var = self.events[branch][leaf]
-            var = ak.to_pandas(ak.pad_none(var, target = self.max_e_mu, clip=True)).unstack()
+            var = self.events[branch][leaf].compute()
+            var = ak.pad_none(var, target = self.max_e_mu, clip=True).to_list()
+            var = pd.DataFrame(var)
             var.columns = [f"{branch_name}_{leaf_name}{i}" for i in range(self.max_e_mu)]
             var.reset_index(drop= True, inplace= True)
             
 
         elif branch == "Jet":
-            var = self.events[branch][leaf]
-            var = ak.to_pandas(ak.pad_none(var, target = self.max_jets, clip=True)).unstack()
+            var = self.events[branch][leaf].compute()
+            var = ak.pad_none(var, target = self.max_jets, clip=True).to_list()
+            var = pd.DataFrame(var)
             var.columns = [f"{branch_name}_{leaf_name}{i}" for i in range(self.max_jets)]
             var.reset_index(drop= True, inplace= True)
             
             
         elif branch == "Weight":
             var = self.events[branch][leaf]
-            var = ak.to_pandas(ak.pad_none(var, target = 2, clip=True)).unstack()
+            var = ak.pad_none(var, target = 2, clip=True).to_list()
+            var = pd.DataFrame(var)
             var.columns = [f"{branch_name}_{leaf_name}{i}" for i in range(2)]
             var.reset_index(drop= True, inplace= True)
             
