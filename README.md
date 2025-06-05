@@ -42,7 +42,7 @@ pip install coffea==2025.3.0
 
 
 ## Running the code
-The main code is stored in `dt_converter.py`. It has a class called `Converter` that can bu used as follows:
+The main code is stored in `dt_converter.py`. It has a class called `Converter` that can be used as follows:
 
 ```
 tree_test = Converter(fname)
