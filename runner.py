@@ -30,6 +30,9 @@ tree_test.generate({"Jet": ["PT", "Eta", "Phi", "Mass"],
                     "MissingET": ["MET", "Phi"]}, 
                     jet_elements = 4, e_mu_elements = 2)
 df = tree_test.df
+df = df.loc[~ df.muon_pt1.isna()]
+df.reset_index(drop = True, inplace = True)
+df
 
 split_events(df, label, output_path, file_type)
 
