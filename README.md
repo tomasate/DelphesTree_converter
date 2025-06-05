@@ -62,6 +62,9 @@ number of jets per event as follows:
 split_events(df, label = 'Signal_37', path = '/store/atehort/', file_type = 'coffea')
 ```
 
+The `runner.py` script is thought to build different files from a rootfile, each one with a `pd.DataFrame` that 
+includes the kinematic information of the first two muons and the jets depending on the jet multiplicity
+
 Use the `runner` via terminal as:
 
 ```
