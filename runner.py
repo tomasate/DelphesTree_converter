@@ -27,7 +27,8 @@ tree_test = Converter(root_path)
 tree_test.generate({"Jet": ["PT", "Eta", "Phi", "Mass"],
                     "Muon": ["PT", "Eta", "Phi", "Charge"],
                     "Electron": ["PT", "Eta", "Phi", "Charge"],
-                    "MissingET": ["MET", "Phi"]})
+                    "MissingET": ["MET", "Phi"]}, 
+                    jet_elements = 4, e_mu_elements = 2)
 df = tree_test.df
 
 split_events(df, label, output_path, file_type)

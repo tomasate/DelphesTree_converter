@@ -43,7 +43,7 @@ class Converter:
     def generate(self, branches = {"Jet": ["PT", "Eta", "Phi", "Mass", "BTag", "TauTag"],
                                    "Muon": ["PT", "Eta", "Phi", "Charge"],
                                    "Electron": ["PT", "Eta", "Phi", "Charge"],
-                                   "MissingET": ["MET", "Phi"]}, jet_elements = 4, e_mu_elements = 1):
+                                   "MissingET": ["MET", "Phi"]}, jet_elements = 4, e_mu_elements = 2):
         """
         Fills the DataFrame with the the columns needed. There is an example in the class documentation.
         
@@ -56,7 +56,7 @@ class Converter:
 
         self.max_jets = jet_elements
         self.max_e_mu = e_mu_elements
-        self.df = pd.DataFrame(index=range(len(events.MissingET.MET.compute())))
+        self.df = pd.DataFrame(index=range(len(selfevents.MissingET.MET.compute())))
 
         for branch, leafes in branches.items():
             for leaf in leafes:
