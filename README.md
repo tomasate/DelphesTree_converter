@@ -34,14 +34,14 @@ And activate it by doing
 conda activate <name_environment>
 ```
 
-##Instalation of the requirements
+## Instalation of the requirements
 When you create the environment you'll get a bunch of modules, the otherones needed you can get them by doing
 ```
 pip install coffea==2025.3.0
 ```
 
 
-##Running the code
+## Running the code
 The main code is stored in `dt_converter.py`. It has a class called `Converter` that can bu used as follows:
 
 ```
