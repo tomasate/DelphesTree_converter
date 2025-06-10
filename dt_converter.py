@@ -56,7 +56,7 @@ class Converter:
 
         self.max_jets = jet_elements
         self.max_e_mu = e_mu_elements
-        self.df = pd.DataFrame(index=range(len(selfevents.MissingET.MET.compute())))
+        self.df = pd.DataFrame(index=range(len(self.events.MissingET.MET.compute())))
 
         for branch, leafes in branches.items():
             for leaf in leafes:
